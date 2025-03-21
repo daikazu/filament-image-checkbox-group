@@ -1,22 +1,24 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "daikazu/filament-image-checkbox-group",
+    "description": "Image-based checkbox group component for FilamentPHP",
     "keywords": [
-        ":vendor_name",
-        "laravel",
-        ":package_slug"
+        "Daikazu",
+        "Filament PHP",
+        "filament-image-checkbox-group"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/daikazu/filament-image-checkbox-group",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Mike Wall",
+            "email": "daikazu@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.4",
+        "php": "^8.3",
+        "filament/forms": "^3.2",
+        "filament/support": "^3.2",
         "spatie/laravel-package-tools": "^1.16",
         "illuminate/contracts": "^10.0||^11.0||^12.0"
     },
@@ -35,13 +37,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Daikazu\\FilamentImageCheckboxGroup\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Daikazu\\FilamentImageCheckboxGroup\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,11 +64,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
-            }
+                "Daikazu\\FilamentImageCheckboxGroup\\FilamentImageCheckboxGroupServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
