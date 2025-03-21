@@ -1,45 +1,44 @@
 <?php
-namespace Daikazu\FilamentImageCheckboxGroup\Forms\Components;
 
+namespace Daikazu\FilamentImageCheckboxGroup\Forms\Components;
 
 use Closure;
 use Filament\Forms\Components\Field;
 
 class ImageCheckboxGroup extends Field
 {
-
-
     protected string $view = 'filament-image-checkbox-group::forms.components.image-checkbox-group';
 
-    protected array | Closure $options = [];
+    protected array|Closure $options = [];
 
-    protected int | Closure | null $minSelect = null;
-    protected int | Closure | null $maxSelect = null;
+    protected int|Closure|null $minSelect = null;
 
-    protected int | array | Closure | null $gridColumns = null;
+    protected int|Closure|null $maxSelect = null;
 
-    public function options(array | Closure $options): static
+    protected int|array|Closure|null $gridColumns = null;
+
+    public function options(array|Closure $options): static
     {
         $this->options = $options;
 
         return $this;
     }
 
-    public function minSelect(int | Closure | null $minSelect): static
+    public function minSelect(int|Closure|null $minSelect): static
     {
         $this->minSelect = $minSelect;
 
         return $this;
     }
 
-    public function maxSelect(int | Closure | null $maxSelect): static
+    public function maxSelect(int|Closure|null $maxSelect): static
     {
         $this->maxSelect = $maxSelect;
 
         return $this;
     }
 
-    public function gridColumns(int | array | Closure $columns): static
+    public function gridColumns(int|array|Closure $columns): static
     {
         $this->gridColumns = $columns;
 
@@ -59,6 +58,7 @@ class ImageCheckboxGroup extends Field
                     'label' => $option['label'] ?? null,
                     'image' => $option['image'] ?? null,
                 ];
+
                 continue;
             }
 
@@ -85,7 +85,7 @@ class ImageCheckboxGroup extends Field
     public function getGridColumns(): array
     {
         $columns = $this->evaluate($this->gridColumns);
-        
+
         if ($columns === null) {
             return [
                 'default' => 1,
@@ -98,6 +98,7 @@ class ImageCheckboxGroup extends Field
         // If columns is an integer, convert to responsive array
         if (is_int($columns) || is_numeric($columns)) {
             $columns = (int) $columns;
+
             return [
                 'default' => 1,
                 'sm' => min($columns, 2),
@@ -108,16 +109,16 @@ class ImageCheckboxGroup extends Field
 
         $validBreakpoints = ['default', 'sm', 'md', 'lg', 'xl', '2xl'];
         $sanitizedColumns = [];
-        
+
         // Ensure default is set
         $sanitizedColumns['default'] = max(1, min(12, (int) ($columns['default'] ?? 1)));
-        
+
         foreach ($validBreakpoints as $breakpoint) {
             if ($breakpoint !== 'default' && isset($columns[$breakpoint])) {
                 $sanitizedColumns[$breakpoint] = max(1, min(12, (int) $columns[$breakpoint]));
             }
         }
-        
+
         return $sanitizedColumns;
     }
 
