@@ -1,4 +1,4 @@
-{{-- 
+{{--
     Tailwind Classes:
     grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4 grid-cols-5 grid-cols-6
     grid-cols-7 grid-cols-8 grid-cols-9 grid-cols-10 grid-cols-11 grid-cols-12
@@ -18,7 +18,6 @@
     :id="$getId()"
     :label="$getLabel()"
     :label-sr-only="$isLabelHidden()"
-    :helper-text="$getHelperText()"
     :hint="$getHint()"
     :hint-icon="$getHintIcon()"
     :required="$isRequired()"
@@ -105,12 +104,11 @@
                 ->merge([
                     'role' => 'group',
                     'aria-label' => $getLabel(),
-                    'aria-describedby' => $getHelperText() ? "{$getId()}-helper-text" : null,
                     'aria-required' => $isRequired() ? 'true' : 'false',
                 ])
          }}
     >
-        <div 
+        <div
             class="text-sm text-gray-500 dark:text-gray-400 flex justify-between items-center"
             id="{{ $getId() }}-description"
         >
@@ -135,7 +133,7 @@
             $activeGridClasses = implode(' ', $activeClasses);
         @endphp
 
-        <div 
+        <div
             class="grid gap-4 {{ $activeGridClasses }}"
             role="presentation"
         >
@@ -164,8 +162,8 @@
                     tabindex="0"
                 >
                     @if ($option['image'])
-                        <div 
-                            class="relative w-full aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800"
+                        <div
+                            class="relative w-full aspect-square overflow-hidden bg-gray-100 dark:bg-gray-800"
                             role="presentation"
                         >
                             <img
@@ -183,19 +181,20 @@
                     @endif
 
                     @if ($option['label'])
-                        <div 
-                            class="p-3 text-center flex-grow flex flex-col justify-center min-h-[3rem]" 
+                        <div
+                            class="p-3 text-center flex-grow flex flex-col justify-center min-h-[3rem] opacity-0 group-hover:opacity-100 group-focus:opacity-100 absolute inset-0 bg-black/60 transition-opacity duration-200 z-10"
                             id="{{ $getId() }}-{{ $loop->index }}-label"
                         >
-                            <span class="text-xs sm:text-sm font-semibold text-gray-600 dark:text-white line-clamp-2">
+                            <span class="text-xs sm:text-sm font-semibold text-white line-clamp-2">
                                 {{ $option['label'] }}
                             </span>
                         </div>
                     @endif
 
+                    {{-- selection icon --}}
                     <div
                         x-show="isSelected(value)"
-                        class="absolute top-2 right-2 bg-primary-500 text-white rounded-full p-1 shadow-sm ring-2 ring-white dark:ring-gray-900"
+                        class="absolute top-2 right-2 bg-primary-500 text-white rounded-full p-1 shadow-sm ring-2 ring-white dark:ring-gray-900 z-20"
                         aria-hidden="true"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="presentation">
@@ -221,9 +220,17 @@
             <input
                 type="hidden"
                 x-model="state"
-                {{ $applyStateBindingModifiers('wire:model') }}="{{ $getStatePath() }}"
-                aria-hidden="true"
+            {{ $applyStateBindingModifiers('wire:model') }}="{{ $getStatePath() }}"
+            aria-hidden="true"
             />
         @endif
     </div>
 </x-dynamic-component>
+
+
+
+
+
+
+
+<?php
