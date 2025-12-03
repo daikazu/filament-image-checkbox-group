@@ -35,19 +35,16 @@ You can install the package via composer:
 composer require daikazu/filament-image-checkbox-group
 ```
 
-### Tailwind Configuration
+### Styling Configuration
 
-Add the package's view path to your Tailwind content configuration in `tailwind.config.js`:
+if you don't have a theme already, you need to create one. check [Filamentphp Theme](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme)
 
-```js
-module.exports = {
-    content: [
-        // ... other content paths
-        './vendor/daikazu/filament-image-checkbox-group/resources/views/**/*.blade.php',
-    ],
-    // ... rest of your config
-};
+after you're done, add the following to your resources/filament/admin/theme.css (depending on your panel)
+
+```css
+@source '../../../../vendor/daikazu/filament-image-checkbox-group/resources/views/**/*.blade.php';
 ```
+finally, run ```npm run build```
 
 You can publish the config file with:
 
