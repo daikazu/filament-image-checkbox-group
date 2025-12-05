@@ -13,6 +13,11 @@
     2xl:grid-cols-1 2xl:grid-cols-2 2xl:grid-cols-3 2xl:grid-cols-4 2xl:grid-cols-5 2xl:grid-cols-6
     2xl:grid-cols-7 2xl:grid-cols-8 2xl:grid-cols-9 2xl:grid-cols-10 2xl:grid-cols-11 2xl:grid-cols-12
 --}}
+
+@php
+    $isLive = $isLive();
+@endphp
+
 <x-dynamic-component
     :component="$getFieldWrapperView()"
     :id="$getId()"
@@ -23,13 +28,14 @@
     :required="$isRequired()"
     :state-path="$getStatePath()"
 >
+
     <div
         x-data="{
-            state: $wire.entangle('{{ $getStatePath() }}'){{ $isLive() ? '.live' : '.defer' }},
+            state: $wire.entangle('{{ $getStatePath() }}'),
             minSelect: {{ $getMinSelect() ?? 'null' }},
             maxSelect: {{ $getMaxSelect() ?? 'null' }},
             required: {{ $isRequired() ? 'true' : 'false' }},
-
+            isLive: @js($isLive),
             init() {
                 if (! Array.isArray(this.state)) {
                     this.state = [];
@@ -38,6 +44,10 @@
                 this.$watch('state', value => {
                     if (this.maxSelect !== null && value.length > this.maxSelect) {
                         this.state = value.slice(0, this.maxSelect);
+                    }
+
+                    if (this.isLive) {
+                        $wire.call('$refresh');
                     }
                 });
             },
@@ -182,7 +192,7 @@
 
                     @if ($option['label'])
                         <div
-                            class="p-3 text-center flex-grow flex flex-col justify-center min-h-[3rem] opacity-0 group-hover:opacity-100 group-focus:opacity-100 absolute inset-0 bg-black/60 transition-opacity duration-200 z-10"
+                            class="p-3 text-center flex-grow flex flex-col justify-center min-h-[3rem] opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/60 transition-opacity duration-200 z-10"
                             id="{{ $getId() }}-{{ $loop->index }}-label"
                         >
                             <span class="text-xs sm:text-sm font-semibold text-white line-clamp-2">
@@ -197,8 +207,9 @@
                         class="absolute top-2 right-2 bg-primary-500 text-white rounded-full p-1 shadow-sm ring-2 ring-white dark:ring-gray-900 z-20"
                         aria-hidden="true"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="presentation">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor" role="presentation">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                         </svg>
                     </div>
 
@@ -208,7 +219,8 @@
                         class="absolute inset-0 bg-gray-100/90 dark:bg-gray-800/90 backdrop-blur-[1px] flex items-center justify-center transition-opacity duration-200"
                         aria-hidden="true"
                     >
-                        <span class="text-xs font-medium text-gray-600 dark:text-gray-300 px-2 py-1 bg-white/80 dark:bg-gray-700/80 rounded-full shadow-sm border border-gray-200 dark:border-gray-600">
+                        <span
+                            class="text-xs font-medium text-gray-600 dark:text-gray-300 px-2 py-1 bg-white/80 dark:bg-gray-700/80 rounded-full shadow-sm border border-gray-200 dark:border-gray-600">
                             Max selected
                         </span>
                     </div>
@@ -226,11 +238,6 @@
         @endif
     </div>
 </x-dynamic-component>
-
-
-
-
-
 
 
 <?php
