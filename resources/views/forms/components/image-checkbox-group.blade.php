@@ -42,6 +42,11 @@
                 }
 
                 this.$watch('state', value => {
+                    if (!Array.isArray(value)) {
+                        this.state = [];
+                        return;
+                    }
+
                     if (this.maxSelect !== null && value.length > this.maxSelect) {
                         this.state = value.slice(0, this.maxSelect);
                     }
@@ -52,29 +57,35 @@
                 });
             },
 
+            getState() {
+                return Array.isArray(this.state) ? this.state : [];
+            },
+
             isSelected(value) {
-                return this.state.includes(value);
+                return this.getState().includes(value);
             },
 
             toggleSelection(value) {
+                const currentState = this.getState();
+
                 if (this.isSelected(value)) {
-                    this.state = this.state.filter(item => item !== value);
+                    this.state = currentState.filter(item => item !== value);
                     return;
                 }
 
-                if (this.maxSelect !== null && this.state.length >= this.maxSelect) {
+                if (this.maxSelect !== null && currentState.length >= this.maxSelect) {
                     return;
                 }
 
-                this.state = [...this.state, value];
+                this.state = [...currentState, value];
             },
 
             canAddMore() {
-                return this.maxSelect === null || this.state.length < this.maxSelect;
+                return this.maxSelect === null || this.getState().length < this.maxSelect;
             },
 
             getSelectionText() {
-                const count = this.state.length;
+                const count = this.getState().length;
 
                 if (count === 0) {
                     return 'None selected';
