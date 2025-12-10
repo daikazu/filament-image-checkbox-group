@@ -184,6 +184,7 @@
                             />
                             <div
                                 x-show="isSelected(value)"
+                                x-cloak
                                 class="absolute inset-0 bg-primary-500/5 transition-opacity duration-200"
                                 aria-hidden="true"
                             ></div>
@@ -204,6 +205,7 @@
                     {{-- selection icon --}}
                     <div
                         x-show="isSelected(value)"
+                        x-cloak
                         class="absolute top-2 right-2 bg-primary-500 text-white rounded-full p-1 shadow-sm ring-2 ring-white dark:ring-gray-900 z-20"
                         aria-hidden="true"
                     >
@@ -216,6 +218,7 @@
                     <!-- Disabled overlay - show when maxed out -->
                     <div
                         x-show="!isSelected(value) && !canAddMore()"
+                        x-cloak
                         class="absolute inset-0 bg-gray-100/90 dark:bg-gray-800/90 backdrop-blur-[1px] flex items-center justify-center transition-opacity duration-200"
                         aria-hidden="true"
                     >
