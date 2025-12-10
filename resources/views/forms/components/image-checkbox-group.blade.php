@@ -119,7 +119,7 @@
          }}
     >
         <div
-            class="text-sm text-gray-500 dark:text-gray-400 flex justify-between items-center"
+            class="text-sm text-gray-500 dark:text-gray-400 flex justify-between items-center select-none"
             id="{{ $getId() }}-description"
         >
             <div x-text="getRequirementText()" aria-live="polite"></div>
@@ -192,7 +192,7 @@
 
                     @if ($option['label'])
                         <div
-                            class="p-3 text-center flex-grow flex flex-col justify-center min-h-[3rem] opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/60 transition-opacity duration-200 z-10"
+                            class="p-3 text-center flex-grow flex flex-col justify-center min-h-[3rem] opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-focus-within:opacity-100 absolute inset-0 bg-black/60 transition-opacity duration-200 z-10"
                             id="{{ $getId() }}-{{ $loop->index }}-label"
                         >
                             <span class="text-xs sm:text-sm font-semibold text-white line-clamp-2">
