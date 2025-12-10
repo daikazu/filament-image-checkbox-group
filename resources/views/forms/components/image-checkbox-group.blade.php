@@ -227,14 +227,5 @@
                 </button>
             @endforeach
         </div>
-
-        @if (!$isDisabled())
-            <input
-                type="hidden"
-                x-model="state"
-            {{ $applyStateBindingModifiers('wire:model') }}="{{ $getStatePath() }}"
-            aria-hidden="true"
-            />
-        @endif
     </div>
 </x-dynamic-component>
