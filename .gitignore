@@ -29,3 +29,10 @@ phpunit.xml
 phpstan.neon
 testbench.yaml
 /coverage
+
+#AI tools
+.ai
+.claude
+CLAUDE.md
+.playwright-mcp
+
