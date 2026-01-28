@@ -318,4 +318,48 @@ describe('ImageCheckboxGroup', function () {
 
     });
 
+    describe('compactLabels', function () {
+
+        it('returns false by default', function () {
+            $component = ImageCheckboxGroup::make('test');
+
+            expect($component->getCompactLabels())->toBeFalse();
+        });
+
+        it('can be set to true', function () {
+            $component = ImageCheckboxGroup::make('test')
+                ->compactLabels();
+
+            expect($component->getCompactLabels())->toBeTrue();
+        });
+
+        it('can be set to false explicitly', function () {
+            $component = ImageCheckboxGroup::make('test')
+                ->compactLabels(false);
+
+            expect($component->getCompactLabels())->toBeFalse();
+        });
+
+        it('supports closure', function () {
+            $component = ImageCheckboxGroup::make('test')
+                ->compactLabels(fn () => true);
+
+            expect($component->getCompactLabels())->toBeTrue();
+        });
+
+        it('supports method chaining', function () {
+            $component = ImageCheckboxGroup::make('test')
+                ->options(['a' => 'A', 'b' => 'B'])
+                ->compactLabels()
+                ->gridColumns(4)
+                ->minSelect(1);
+
+            expect($component)->toBeInstanceOf(ImageCheckboxGroup::class);
+            expect($component->getCompactLabels())->toBeTrue();
+            expect($component->getOptions())->toHaveCount(2);
+            expect($component->getMinSelect())->toBe(1);
+        });
+
+    });
+
 });

@@ -24,8 +24,11 @@ A custom form component for FilamentPHP v4 that displays checkbox group options 
 - Emits selected values to Livewire as an array
 - Styled options as cards with hover/active states
 - Prevents selecting more than max items
+- Compact label mode for text-only button styling
+- Image preview popover on hover (in compact mode)
 - Reusable as a custom form field
-- Full keyboard accessibility support
+- Full keyboard accessibility support (WCAG 2.1 AA compliant)
+- Respects `prefers-reduced-motion` for users with vestibular disorders
 
 ## Installation
 
@@ -160,6 +163,56 @@ ImageCheckboxGroup::make('categories')
         'books' => 'Books',
     ])
     ->gridColumns(2) // Show in 2 columns
+    ->required()
+```
+
+### Compact Labels Layout
+
+Use `compactLabels()` to display options as compact text buttons instead of square image cards. This is useful when you want a more traditional button-group appearance, or when images are optional supplementary content rather than the primary visual.
+
+```php
+ImageCheckboxGroup::make('attachments')
+    ->options([
+        'swivel-hook' => 'Swivel J-Hook',
+        'bulldog-clip' => 'Bulldog Clip',
+        'key-ring' => 'Key Ring',
+    ])
+    ->compactLabels() // Renders as compact text buttons
+    ->gridColumns(3)
+    ->required()
+```
+
+**Behavior differences with `compactLabels()`:**
+
+| Mode | Has Image | Result |
+|------|-----------|--------|
+| Normal (default) | Yes | Square card with image, label on hover |
+| Normal (default) | No | Square card with centered label |
+| Compact | Yes | Compact text button + image popover on hover/focus |
+| Compact | No | Compact text button |
+
+**With images and compact labels (popover preview):**
+
+When options have images but `compactLabels()` is enabled, the images appear as a popover preview on hover and focus. The popover automatically positions itself based on available screen space (top, bottom, left, or right).
+
+```php
+ImageCheckboxGroup::make('attachments')
+    ->options([
+        'swivel-hook' => [
+            'label' => 'Swivel J-Hook',
+            'image' => asset('images/attachments/swivel-hook.jpg'),
+        ],
+        'bulldog-clip' => [
+            'label' => 'Bulldog Clip',
+            'image' => asset('images/attachments/bulldog-clip.jpg'),
+        ],
+        'key-ring' => [
+            'label' => 'Key Ring',
+            'image' => asset('images/attachments/key-ring.jpg'),
+        ],
+    ])
+    ->compactLabels() // Shows text buttons with image popover on hover
+    ->gridColumns(4)
     ->required()
 ```
 

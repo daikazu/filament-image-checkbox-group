@@ -17,6 +17,8 @@ class ImageCheckboxGroup extends Field
 
     protected int|array|Closure|null $gridColumns = null;
 
+    protected bool|Closure $compactLabels = false;
+
     public function options(array|Closure $options): static
     {
         $this->options = $options;
@@ -43,6 +45,18 @@ class ImageCheckboxGroup extends Field
         $this->gridColumns = $columns;
 
         return $this;
+    }
+
+    public function compactLabels(bool|Closure $compact = true): static
+    {
+        $this->compactLabels = $compact;
+
+        return $this;
+    }
+
+    public function getCompactLabels(): bool
+    {
+        return $this->evaluate($this->compactLabels);
     }
 
     public function getOptions(): array
