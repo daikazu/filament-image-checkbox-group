@@ -10,7 +10,13 @@
 
 # Filament Image Checkbox Group
 
-A custom form component for FilamentPHP v4 that displays checkbox group options as image-based selectable buttons.
+A custom form component for FilamentPHP that displays checkbox group options as image-based selectable buttons.
+
+## Requirements
+
+- PHP 8.3+
+- Laravel 12 or 13
+- Filament v4 or v5
 
 ![Screenshot of Image Checkbox Group](docs/screenshot.png)
 
@@ -40,7 +46,7 @@ composer require daikazu/filament-image-checkbox-group
 
 ### Styling Configuration
 
-if you don't have a theme already, you need to create one. check [Filamentphp Theme](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme)
+if you don't have a theme already, you need to create one. check the Filament theme docs for your version: [v5](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme) / [v4](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme)
 
 after you're done, add the following to your resources/filament/admin/theme.css (depending on your panel)
 
