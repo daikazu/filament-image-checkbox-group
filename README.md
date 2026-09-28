@@ -8,6 +8,8 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/daikazu/filament-image-checkbox-group/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/daikazu/filament-image-checkbox-group/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/daikazu/filament-image-checkbox-group.svg?style=flat-square)](https://packagist.org/packages/daikazu/filament-image-checkbox-group)
 
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/mikewallcodes)
+
 # Filament Image Checkbox Group
 
 A custom form component for FilamentPHP that displays checkbox group options as image-based selectable buttons.
